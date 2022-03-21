@@ -46,6 +46,7 @@ let currentQuestion = 0;
 let rightQuestions = 0;
 let soundSuccess = new Audio('sounds/success.mp3');
 let soundDanger = new Audio('sounds/danger.mp3');
+let soundEnd = new Audio('sounds/end.mp3');
 
 
 function init() {
@@ -60,8 +61,8 @@ function showNext() {
     }
     else {
         showQuestion();
-        progressBar();
     }
+    progressBar();
 }
 
 
@@ -71,6 +72,7 @@ function gameIsOver() {
 
 
 function showQuestion() {
+    enableAnswers();
     let question = questions[currentQuestion];
     document.getElementById('current-question').innerHTML = currentQuestion + 1;
     document.getElementById('question').innerHTML = question["question"];
@@ -82,6 +84,7 @@ function showQuestion() {
 
 
 function showEndscreen() {
+    soundEnd.play();
     document.getElementById('endscreen').style = '';
     document.getElementById('question-body').style = 'display: none';
     document.getElementById('endscreen-question-number').innerHTML = questions.length;
@@ -98,6 +101,7 @@ function answer(selection) {
         answerFalse(selection);
     }
     document.getElementById('next-button').disabled = false;
+    disableAnswers();
 }
 
 
@@ -108,7 +112,7 @@ function rightAnswerSelected(selection) {
 
 
 function progressBar() {
-    let percent = (currentQuestion + 1) / questions.length;
+    let percent = (currentQuestion) / questions.length;
     percent = Math.round(percent * 100);
     document.getElementById('progress-bar').innerHTML = `${percent} %`;
     document.getElementById('progress-bar').style = `width: ${percent}%`;
@@ -146,8 +150,22 @@ function resetAnswerButtons() {
 }
 
 
+function enableAnswers() {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById('card-answer-' + i).disabled = false;
+    }
+}
+
+
+function disableAnswers() {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById('card-answer-' + i).disabled = true;
+    }
+}
+
+
 function restartGame() {
-    document.getElementById('header-image').src = 'img/logo 2.png';
+    document.getElementById('header-image').src = 'img/card-pic.jpg';
     currentQuestion = 0;
     rightQuestions = 0;
     document.getElementById('endscreen').style = 'display: none';

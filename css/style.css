@@ -1,17 +1,31 @@
 body {
-    background-color: blue;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    min-height: 100vh;
+}
+
+.navbar>.container-fluid {
+    justify-content: center !important;
 }
 
 .container {
-    background-color: blue;
-    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0) !important;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 3.2rem);
 }
 
 .quiz-card {
-    width: 30rem;
+    width: 20rem;
+}
+
+.card-img-top {
+    height: 8rem;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0.7rem 0.7rem !important;
 }
 
 .answer-card:hover {
